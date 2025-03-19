@@ -17,7 +17,8 @@ const Login = () => {
     console.log(formData);
     userSignIn(email, password)
       .then((result) => {
-        console.log(result.user);
+        console.log(result.user.email);
+
         navigate(from);
       })
       .catch((error) => {

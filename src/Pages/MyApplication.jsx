@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/AuthHooks";
+import UseAxios from "../hooks/UseAxios";
 
 const MyApplication = () => {
   const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
 
+  const axiosSecure = UseAxios();
+
   useEffect(() => {
-    fetch(`http://localhost:3000/job_application?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setJobs(data);
-      });
+    // fetch(`http://localhost:3000/job_application?email=${user.email}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setJobs(data);
+    //   });
+    // axios
+    //   .get(`http://localhost:3000/job_application?email=${user.email}`)
+    //   .then((res) => {
+    //     setJobs(res.data);
+    //   });
+    axiosSecure.get(`/job_application?email=${user.email}`).then((res) => {
+      setJobs(res.data);
+    });
   }, []);
   return (
     <div className="overflow-x-auto">
